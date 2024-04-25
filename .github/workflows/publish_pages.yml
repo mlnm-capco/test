@@ -34,6 +34,10 @@ jobs:
       # This turns the files into a plain folder instead of a git repository
       - run: rm -rf ${{ matrix.branch }}/.git
       - run: ls -al
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.branch }}
+          path: ${{ matrix.branch }}
 
   deploy:
     needs: checkout-matrix
@@ -42,6 +46,23 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          clean: false
+      - name: Checkout 0.6
+        uses: actions/checkout@v4
+        with:
+          ref: 0.6
+          path: 0.6
+          clean: false
+      - name: Checkout 0.5
+        uses: actions/checkout@v4
+        with:
+          ref: gha-pages
+          path: 0.5
+          clean: false
       - name: ls
         run: ls -al
       - name: Setup Pages
