@@ -21,7 +21,7 @@ jobs:
   checkout-matrix:
     strategy:
       matrix:
-        branch: [ gha-pages, 0.6 ]
+        branch: [ "gha-pages", "0.6" ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ${{ matrix.branch }}
