@@ -29,8 +29,18 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}${{ github.ref_name }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout current branch
         uses: actions/checkout@v4
+      - name: Checkout 0.6
+        uses: actions/checkout@v4
+        with:
+          ref: 0.6
+          # Put the checked out files inside a sub folder
+          path: 0.6
+          clean: false
+      # Delete the .git folder
+      # This turns the files into a plain folder instead of a git repository
+      - run: rm -rf 0.6/.git
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
@@ -42,4 +52,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Output target url
-        run: echo ${{ steps.deployment.outputs.page_url }}/${{ github.ref_name }}
+        run: echo ${{ steps.deployment.outputs.page_url }}${{ github.ref_name }}
