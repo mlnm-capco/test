@@ -51,18 +51,27 @@ jobs:
         with:
           ref: main
           clean: false
+          sparse-checkout: |
+            /specs
+            index.html
       - name: Checkout 0.6
         uses: actions/checkout@v4
         with:
           ref: 0.6
           path: 0.6
           clean: false
+          sparse-checkout: |
+            /specs
+            index.html
       - name: Checkout 0.5
         uses: actions/checkout@v4
         with:
           ref: gha-pages
           path: 0.5
           clean: false
+          sparse-checkout: |
+            /specs
+            index.html
       - name: ls
         run: ls -al
       - name: Setup Pages
