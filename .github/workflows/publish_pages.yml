@@ -18,27 +18,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  checkout-matrix:
-    strategy:
-      matrix:
-        branch: [ "gha-pages", "0.6" ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout ${{ matrix.branch }}
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ matrix.branch }}
-          path: ${{ matrix.branch }}
-          clean: false
-      # Delete the .git folder
-      # This turns the files into a plain folder instead of a git repository
-      - run: rm -rf ${{ matrix.branch }}/.git
-      - run: ls -al
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.branch }}
-          path: ${{ matrix.branch }}
-
   deploy:
     needs: checkout-matrix
     environment:
@@ -52,7 +31,7 @@ jobs:
           ref: main
           clean: false
           sparse-checkout: |
-            /specs
+            specs
             index.html
       - name: Checkout 0.6
         uses: actions/checkout@v4
@@ -61,7 +40,7 @@ jobs:
           path: 0.6
           clean: false
           sparse-checkout: |
-            /specs
+            specs
             index.html
       - name: Checkout 0.5
         uses: actions/checkout@v4
@@ -70,7 +49,7 @@ jobs:
           path: 0.5
           clean: false
           sparse-checkout: |
-            /specs
+            specs
             index.html
       - name: ls
         run: ls -al
