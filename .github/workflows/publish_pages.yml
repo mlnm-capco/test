@@ -33,6 +33,7 @@ jobs:
       # Delete the .git folder
       # This turns the files into a plain folder instead of a git repository
       - run: rm -rf ${{ matrix.branch }}/.git
+      - run: ls -al
 
   deploy:
     needs: checkout-matrix
@@ -43,8 +44,6 @@ jobs:
     steps:
       - name: ls
         run: ls -al
-      - name: ls
-        run: ls -al 0.6
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
