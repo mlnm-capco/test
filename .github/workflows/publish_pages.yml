@@ -31,8 +31,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Output target url
-        run: echo ${{ steps.deployment.outputs.page_url }}/${{ github.ref_name }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
@@ -43,3 +41,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Output target url
+        run: echo ${{ steps.deployment.outputs.page_url }}/${{ github.ref_name }}
