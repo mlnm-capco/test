@@ -22,6 +22,7 @@ jobs:
     strategy:
       matrix:
         branch: [ gha-pages, 0.6 ]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout ${{ matrix.branch }}
         uses: actions/checkout@v4
