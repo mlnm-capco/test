@@ -46,10 +46,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout master
+      - name: Checkout main
         uses: actions/checkout@v4
         with:
-          ref: master
+          ref: main
           clean: false
       - name: Checkout 0.6
         uses: actions/checkout@v4
